@@ -1,0 +1,28 @@
+﻿@inject IJSRuntime wszczykujeJs
+
+<div style="height:100%; width:100%; background-color:@colorValue">
+    <input type="text" @bind="inputText"/>
+    <input type="button" @onclick="OnClick" value="aleDuzyKutach" />
+    <input type="button" @onclick="PokaKuciape" value="Kuciap" />
+</div>
+
+@code {
+    private string colorValue="green";
+    private string inputText;
+
+    private async Task PokaKuciape()
+    {
+        await wszczykujeJs.InvokeVoidAsync("JakasFunkcja");
+    }
+
+    private async Task OnClick()
+    {
+        if (string.IsNullOrEmpty(inputText))
+            return;
+
+        if (string.Equals(inputText, "black", StringComparison.OrdinalIgnoreCase))
+            await wszczykujeJs.InvokeVoidAsync("alert", "Warning!");
+        else
+            colorValue = inputText;
+    }
+}

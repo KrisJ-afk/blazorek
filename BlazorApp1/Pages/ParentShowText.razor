@@ -1,0 +1,29 @@
+﻿@page "/showText"
+<h3>ParentShowText</h3>
+
+<input type="button" value="Putton jeden" @onclick="() => {showComp1=true;}"/>
+<input type="button" value="Bluddon osiem" @onclick="() => {showComp1=false;}"/>
+<div>
+    @if (showComp1)
+    {
+        <div style="border:5px; border-style:solid;">
+            <ChildInputTxt OnSubmit=GetText></ChildInputTxt>
+        </div>
+        <input type="text" @bind-value="textValue"/>
+    }
+    else
+    {
+        <WypiszDupa></WypiszDupa>
+    }
+</div>
+
+@code {
+    private string textValue = "dupa";
+    private bool showComp1 = false;
+    private void GetText(string value)
+    {
+        if (string.IsNullOrEmpty(textValue))
+            return;
+        textValue = value;
+    }
+}

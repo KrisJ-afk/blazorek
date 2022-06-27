@@ -1,0 +1,15 @@
+﻿<input type="text" @bind-value="textValue" />
+<input type="button" @onclick="Click"/>
+
+@code {
+    private string textValue;
+
+    private async Task Click()
+    {
+        await OnSubmit.InvokeAsync(textValue);
+    }
+
+    [Parameter]
+    public EventCallback<string> OnSubmit { get; set; }
+
+}
